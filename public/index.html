@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="todoApp">
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="todo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+</head>
+<body ng-controller="TodoListController as todoList">
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <center>{{todoList.title}}</center>
+      </div>
+      <div class="row">
+        <div class="col s3">
+          รายชื่อลูกค้า <br>
+          ชื่อ <input type="text" ng-model = "input.name"> <br>
+          นามสกุล <input type="text" ng-model = "input.surname"> <br>
+          จองห้อง <input type="number" ng-model = "input.room"> <br>
+          เข้าพัก <input type="date" ng-model = "input.start"> <br>
+          ออก <input type="date" ng-model = "input.end"> <br>  
+          <button type="button" ng-click = "todoList.add(input)">ค้นหา</button>
+        </div>
+        <div class="col s3" >
+          <div ng-repeat = "show in todoList.getData">
+            {{show.name}} <br>
+            {{show.surname}} <br>
+            {{show.room}} <br>
+            {{todoList.time(show.start)}} <br>
+            {{todoList.time(show.end)}} <br>
+            <button type="button" ng-click = "todoList.delete(show.id, $index)">ลบ</button>
+            <hr>
+          </div>
+        </div>
+    </div>
+</body>
+</html>
