@@ -22,7 +22,7 @@
           นามสกุล <input type="text" ng-model = "input.surname"> <br>
           จองห้อง <input type="number" ng-model = "input.room"> <br>
           เข้าพัก <input type="date" ng-model = "input.start"> <br>
-          ออก <input type="date" ng-model = "input.end"> <br>  
+          ออก <input type="date" ng-model = "input.end"> <br>
           <button type="button" ng-click = "app.add(input)">ค้นหา</button>
         </div>
         <div class="col s3" >
@@ -33,12 +33,12 @@
             {{show.room}} <br>
             {{app.time(show.start)}} <br>
             {{app.time(show.end)}} <br>
-            <button type="button" ng-click = "app.delete(show._id, $index)">ลบ</button>
+            <button type="button" ng-click = "app.delete(show, $index)">ลบ</button>
             <hr>
           </div>
         </div>
         <div class="col s3">
-          <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> 
+          <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
         </div>
     </div>
 </body>

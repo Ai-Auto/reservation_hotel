@@ -4,7 +4,7 @@
   var router = express.Router()
   var Model = require('./data.schema.js')
 
-  router.get('/', function (req, res, next) {
+  router.get('/api/data', function (req, res, next) {
     Model.find({}).exec(function (err, results) {
       if (err) {
         res.status(500).send(err)
@@ -13,8 +13,7 @@
       }
     })
   })
-
-  router.post('/', function (req, res, next) {
+  router.post('/api/data', function (req, res, next) {
     var obj = new Model(req.body)
     obj.save(function (err, obj) {
       if (err) {
@@ -24,17 +23,16 @@
       }
     })
   })
-  router.delete('/api/data/:id', function (req, res) {
-    Model.findById(req.params.id, function (err, Model) {
-      Model.remove(function (err) {
-        if (!err) {
-          console.log('removed')
-          return res.send('')
-        } else {
-          console.log(err)
-        }
-      })
+  router.post('/api/del', function (req, res, next) {
+    console.log(req.body._id)
+    Model.remove({_id: req.body._id}).exec(function (err, results) {
+      if (err) {
+        res.status(500).send(err)
+      } else {
+        res.send(results)
+      }
     })
   })
+
   module.exports = router
 })()
