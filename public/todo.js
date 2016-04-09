@@ -8,14 +8,31 @@ angular.module('todoApp', [])
       get()
     }, 3000)
     app.add = function (input) {
-      save(input)
+      getTime(input)
+    }
+    function getTime (input) {
+      $http.get('/api/data')
+        .then(function success (response) {
+          if (response.data.length === 0) {
+            console.log('000')
+            save(input)
+          }
+          if (app.time(input.start) === app.time(response.data.start)) {
+            console.log(app.time(input.start) === app.time(response.data.start))
+            console.log('เงื่อนไขที่วันซ้ำ')
+          }
+          if (app.time(input.start) !== app.time(response.data.start)) {
+            console.log(app.time(input.start) !== app.time(response.data.start))
+            console.log('เงื่อนไขที่วันไม่ซ้ำ')
+            save(input)
+          }
+        })
     }
     function save (data) {
       $http.post('/api/data', data)
         .then(function success (response) {
           console.log(response)
           get()
-          alert('Success')
         })
     }
     function get () {
