@@ -45,9 +45,9 @@ angular.module('todoApp', [])
       return moment(time).format('MMMM Do YYYY')
     }
     app.delete = function (id, index) {
-      $http.delete('/api/data/' + id)
-        .success(function (data) {
-          alert('delete')
+      $http.post('/api/del', id)
+        .then(function success (response) {
+          console.log(response)
           app.getData.splice(index, 1)
           get()
         })
